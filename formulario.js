@@ -1,13 +1,17 @@
-var formulario = document.querySelector("#form")
-
-formulario.onsubmit = function(e) {
-
-  e.prevent();
+var formulario = document.querySelector("#formulario");
+var nombre = document.getElementById("nombre");
+var edad = document.getElementById("age");
+var emailnacionalidad = document.getElementById("nationality");     //declaro las variables
+var form = document.getElementById("form");
+var parrafo = document.getElementById("warnings");
+form.addEventListener("submit", e=>{
+  e.preventDefault()
   
   var n = formulario.elements[0]
   var e = formulario.elements[1]
   var na = formulario.elements[2]
-
+  var  entrar = false
+  parrafo.innerHTML = ""
   var nombre = n.value
   var edad = e.value
 
@@ -28,7 +32,17 @@ if (nombre.length > 0
     && edad < 120) ) {
   agregarInvitado(nombre, edad, nacionalidad)
   }
+
+  if(entrar){
+    parrafo.innerHTML = warnings
+ }
+ else{
+  parrafo.innerHTML = "Registro exitosamente"
+ }
+
 }
+
+
 
 var botonBorrar = document.createElement("button")
 botonBorrar.textContent = "Eliminar invitado"
@@ -51,6 +65,7 @@ function agregarInvitado(nombre, edad, nacionalidad) {
   else if (nacionalidad === "per") {
     nacionalidad = "Peruana"
   }
+
 
 var lista = document.getElementById("lista-de-invitados")
 
@@ -94,4 +109,5 @@ elementoLista.appendChild(botonBorrar);
 // this.parentNode.style.display = 'none';
 botonBorrar.parentNode.remove()
   }
-}
+
+})
